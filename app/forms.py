@@ -1,5 +1,5 @@
 from django import forms
-from .models import Company
+from .models import Company, ServiceOrder, Service
 from localflavor.br.br_states import STATE_CHOICES
 
 
@@ -13,3 +13,15 @@ class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
         fields = ['name', 'uf', 'email', 'services']
+
+
+class ServiceModelForm(forms.ModelForm):
+    class Meta:
+        model = Service
+        fields = ['title']
+
+
+class ServiceOrderModelForm(forms.ModelForm):
+    class Meta:
+        model = ServiceOrder
+        fields = ['title', 'company', 'service']
