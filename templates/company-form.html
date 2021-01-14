@@ -13,6 +13,7 @@
       <form method="post">
         {% csrf_token %}
         {% bootstrap_form form%}
+{#        {% bootstrap_field CompanyForm.cnpj show_label=False %}#}
         {%buttons%}
         <button class="btn btn-primary" type="submit">Save</button>
           {% if company %}

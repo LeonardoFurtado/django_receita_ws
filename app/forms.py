@@ -12,7 +12,7 @@ class SearchModelForm(forms.Form):
 class CompanyForm(forms.ModelForm):
     class Meta:
         model = Company
-        fields = ['name', 'uf', 'email', 'services']
+        fields = ['cnpj', 'name', 'uf', 'email', 'services']
 
 
 class ServiceModelForm(forms.ModelForm):

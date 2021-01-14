@@ -13,6 +13,7 @@ class Base(models.Model):
 
 
 class Service(Base):
+    """Service that a Company could provide."""
     title = models.CharField(max_length=100)
 
     def __str__(self):
@@ -31,6 +32,7 @@ class Company(Base):
 
 
 class ServiceOrder(Base):
+    """A service order with one or more services """
     title = models.CharField(max_length=100)
     company = models.ForeignKey(Company, on_delete=models.CASCADE)
     service = models.ForeignKey(Service, on_delete=models.CASCADE)
