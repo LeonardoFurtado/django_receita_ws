@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Company, ServiceOrder
-from .forms import SearchModelForm, CompanyForm, ServiceModelForm
+from .forms import SearchModelForm, CompanyForm, ServiceModelForm, ServiceOrderModelForm
 
 
-def list_companies(request):
+def index(request):
     form = SearchModelForm(request.POST)
 
     if form.is_valid():
@@ -23,7 +23,7 @@ def create_company(request):
 
     if form.is_valid():
         form.save()
-        return redirect('list_companies')
+        return redirect('index')
 
     return render(request, 'company-form.html', {'form': form})
 
@@ -34,7 +34,7 @@ def update_company(request, id):
 
     if form.is_valid():
         form.save()
-        return redirect('list_companies')
+        return redirect('index')
 
     return render(request, 'company-form.html', {'form': form, 'company':company})
 
@@ -44,7 +44,7 @@ def delete_company(request, id):
 
     if request.method == 'POST':
         company.delete()
-        return redirect('list_companies')
+        return redirect('index')
 
     return render(request, 'company-delete-confirm.html', {'company': company})
 
@@ -59,7 +59,7 @@ def create_service_order(request):
 
     if form.is_valid():
         form.save()
-        return redirect('list_companies')
+        return redirect('index')
 
     return render(request, 'service-orders-form.html', {'form': form})
 
@@ -69,6 +69,6 @@ def create_service(request):
 
     if form.is_valid():
         form.save()
-        return redirect('list_companies')
+        return redirect('index')
 
     return render(request, 'service-form.html', {'form': form})
