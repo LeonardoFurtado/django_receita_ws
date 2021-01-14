@@ -1,0 +1,83 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% bootstrap_css %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <title>Companies Manager</title>
+  </head>
+  <body>          
+    <div class="container">
+      <h1>Company Manager</h1> 
+      
+      <form method="post">
+        {% csrf_token %}
+        <div class="container row">
+        {% bootstrap_form form layout='inline'%}
+        <button class="btn btn-primary btn-sm mb-2" type="submit">Search</button>
+      </div>                
+      </form>       
+
+      <table class="table">      
+        <thead class="thead-dark">
+          <tr>
+            <th>Company</th>
+            <th>UF</th>
+            <th>Email</th>
+            <th>Services</th>
+            <th>Service Orders</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for company in companies%}
+            <tr>            
+              <td><a href="{% url 'update_company' company.id%}">{{ company.name }}</a></td>
+              <td>{{ company.uf }}</td>
+              <td>{{ company.email }}</td>
+              <td>            
+                  <a data-toggle="modal" href="#modalExemplo{{company.id}}">
+                    Services
+                  </a>              
+              </td>
+              <td>
+                <a href="{% url 'list_service_orders' company.id%}">Service Orders</a>
+              </td>
+            </tr> 
+            <!-- Modal -->
+            <div class="modal fade" id="modalExemplo{{company.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Services provided by {{ company.name }}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    {% for service in company.services.all%}                      
+                      <ul class="list-group list-group-flush">
+                        <li class="list-group-item">{{ service.title }}</li>                      
+                      </ul>
+                    {% endfor %}
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                    
+                  </div>
+                </div>
+              </div>
+            </div>      
+          {% endfor %}
+        </tbody>
+      </table>  
+      <a class="btn btn-primary" href="{% url 'create_company' %}">New company</a>
+      <a class="btn btn-primary" href="{% url 'create_service' %}">New service</a>
+      <a class="btn btn-primary" href="{% url 'create_service_order' %}">New Service Order</a>
+    </div>
+
+
+    
+  </body>
+</html>

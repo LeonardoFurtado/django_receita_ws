@@ -1,0 +1,16 @@
+{% load bootstrap4 %}
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Companies Manager</title>
+    {% bootstrap_css %}
+  </head>
+  <body>
+    <form class="container center_div" method="post">
+      {% csrf_token %}
+      <h2>Are You sure you want to remove {{ company.name}}</h2>
+      <button class="btn btn-danger"type="submit" name="button">Confirm</button>
+    </form>
+  </body>
+</html>
