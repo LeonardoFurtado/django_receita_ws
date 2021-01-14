@@ -1,6 +1,7 @@
 # [WIP] django_receita_ws :snake:
 
 A Django Web App used with [Receitaws](https://receitaws.com.br/api)
+ReceitaWS consumption probably will be made with ReactJS
 
 ### TODO
 * Large refactor.
