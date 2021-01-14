@@ -109,6 +109,7 @@ media/
 
 #pycharm
 .idea
+django
 
 # Ignore Django Migrations in Development if you are working on team
 
